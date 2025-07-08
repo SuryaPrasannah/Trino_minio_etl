@@ -1,13 +1,13 @@
 services:
   trino-coordinator:
-    image: 'trinodb/trino:444'
+    image: 'trinodb/trino:latest'
     hostname: trino-coordinator
     ports:
       - '8080:8080'
     volumes:
-      - C:\Users\surya\Desktop\Docker_Learning\first-demo-starting-setup\trino-hive-docker\docker-compose\conf\core-site.xml:/etc/trino/etc/hadoop/core-site.xml
-      - C:\Users\surya\Desktop\Docker_Learning\first-demo-starting-setup\trino-hive-docker\docker-compose\conf\metastore-site.xml:/etc/trino/metastore-site.xml
-      - C:\Users\surya\Desktop\Docker_Learning\first-demo-starting-setup\trino-hive-docker\docker-compose\etc\catalog:/etc/trino/catalog
+      - ./conf/core-site.xml:/etc/trino/etc/hadoop/core-site.xml
+      - ./conf/metastore-site.xml:/etc/trino/metastore-site.xml
+      - ./etc/catalog:/etc/trino/catalog
     networks:
       - trino-network
 
@@ -22,6 +22,20 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: hive_db
+    networks:
+      - trino-network
+
+  postgres_src:
+    image: 'postgres:11'
+    hostname: postgres_src
+    expose:
+      - '5433'
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydb
     networks:
       - trino-network
 
