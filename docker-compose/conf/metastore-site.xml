@@ -18,7 +18,7 @@
     </property>
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>s3a://dockertestbucket/test_tables</value>
+        <value>s3a://dockertestbucket/</value>
     </property>
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
